@@ -1,0 +1,37 @@
+.flip-clock {
+    --fcc-flip-duration: 0.5s; /* transition duration when flip card */
+    --fcc-spacing: 8px; /* space between unit times and separators */
+    --fcc-digit-block-width: 90px; /* width of digit card */
+    --fcc-digit-block-height: 70px; /* height of digit card, highly recommend in even number */
+    --fcc-digit-block-radius: 5px; /* border radius of digit card */
+    --fcc-digit-block-spacing: 5px; /* space between blocks in each unit of time */
+    --fcc-digit-font-size: 50px; /* font size of digit */
+    --fcc-digit-color: #fb6087; /* color of digit */
+    --fcc-label-font-size: 30px; /* font size of label */
+    --fcc-label-color: #63637B; /* color of label */
+    --fcc-background: #2c2c45; /* background of digit card */
+    --fcc-divider-color: black; /* color of divider */
+    --fcc-divider-height: 1px; /* height of divider */
+    --fcc-separator-size: 6px; /* size of colon */
+    --fcc-separator-color: none; /* color of colon */
+  }
+@media(max-width:1000px){
+ .flip-clock{
+    scale: 1;
+  }
+}
+@media(max-width:822px){
+  .flip-clock{
+     scale: 0.8;
+   }
+ }
+ @media(max-width:661px){
+  .flip-clock{
+     scale: 0.6;
+   }
+ }
+ @media(max-width:500px){
+  .flip-clock{
+     scale: 0.4;
+   }
+ }

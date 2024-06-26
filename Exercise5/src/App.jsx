@@ -1,31 +1,61 @@
+import FlipClockCountdown from "@leenguyen/react-flip-clock-countdown";
+import moment from "moment/moment";
+import "@leenguyen/react-flip-clock-countdown/dist/index.css";
+import { useEffect, useState } from "react";
+
+import "./clock.css";
 import backgroundStars from "./assets/bg-stars.svg";
-import FlipCountdown from "@rumess/react-flip-countdown";
 import Hills from "./assets/pattern-hills.svg";
 function App() {
+  const targetDate = moment("09-03-2024");
+  const formatDate = targetDate.format("MM-DD-YYYY hh:mm:ss");
+  const searchParam = new URLSearchParams(window.location.search);
+  const dateValue = searchParam.get("date");
+  const dateRegex = /^\d{2}-\d{2}-\d{4} \d{2}:\d{2}:\d{2}$/;
+  const dateTest = dateRegex.test(dateValue);
+  const [actualDate, setActualDate] = useState(formatDate);
+  useEffect(() => {
+    const containAlphabet = /^[a-zA-Z]+$/;
+    const url = window.location.href.replace("%20", "-");
+    window.history.replaceState(null, null, url);
+    if (dateTest) {
+      return setActualDate(dateValue);
+    }
+    if (!dateValue) {
+      return setActualDate(formatDate);
+    }
+    if (containAlphabet.test(dateValue)) {
+      return setActualDate(formatDate);
+    }
+    setActualDate(dateValue);
+  }, [actualDate, dateValue, formatDate, dateTest]);
+
   return (
     <>
-      <div className="countdown-app w-screen h-screen bg-gradient-to-b from-darkblue to-desblue">
-        <img src={backgroundStars} alt="Stars" className="h-screen fixed" />
-        <div className="pt-40 space-y-20">
+      <div className="countdown-app lg:w-screen h-screen bg-gradient-to-b from-darkblue to-desblue overflow-auto">
+        <img
+          src={backgroundStars}
+          alt="Stars"
+          className="h-screen fixed animate-stars"
+        />
+        <div className="pt-40 space-y-10">
           <h1 className="text-3xl text-white text-center uppercase tracking-widest">
             We&apos;re Launching Soon
           </h1>
-          <FlipCountdown
-            hideYear
-            monthTitle="Months"
-            dayTitle="Days"
-            hourTitle="Hours"
-            minuteTitle="Minutes"
-            secondTitle="Seconds"
-            titlePosition="bottom"
-            theme="dark"
-            endAt={"2024-09-03 01:26:58"} // Date/Time
-          />
+          <h3 className="text-center text-gray-700 text-2xl">
+            {moment(actualDate).format("LL")}
+          </h3>
+          <div className="flex flex-wrap justify-center items-center">
+            <FlipClockCountdown
+              className="flip-clock"
+              to={actualDate}
+            ></FlipClockCountdown>
+          </div>
         </div>
       </div>
       <div>
         <img src={Hills} alt="Hills" className="w-full bottom-1 fixed" />
-        <div className="socmed w-full absolute bottom-16 flex justify-center items-center gap-10">
+        <div className="socmed w-full absolute bottom-16 flex justify-center items-center gap-10 min-[375px]">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24">
             <path
               fill="#8385A9"
