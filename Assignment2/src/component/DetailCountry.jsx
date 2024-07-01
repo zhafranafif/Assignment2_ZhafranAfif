@@ -53,12 +53,12 @@ const DetailCountry = () => {
         return (
           <div
             key={index}
-            className="w-full h-full flex justify-center items-center gap-20 mt-16"
+            className="w-full h-full flex flex-col gap-20 mt-16 justify-center items-center md:flex-row"
           >
             <div>
               <img src={data.flags.png} alt="" className="w-full" />
             </div>
-            <div className="flex flex-col justify-start gap-5">
+            <div className="flex flex-col justify-start gap-5 md:justify-center">
               <h1 className="text-lg font-extrabold dark:text-white">
                 {data.name.common}
               </h1>
@@ -122,24 +122,26 @@ const DetailCountry = () => {
                     Border Countries:
                   </span>{" "}
                 </h2>
-                {!isEmpty(data.borders)
-                  ? data.borders.map((btn, index) => (
-                      <div key={index}>
-                        {borderCountry.map((data, index) => {
-                          if (data.cca3 === btn) {
-                            return (
-                              <Link key={index} to={`/${data.name.common}`}>
-                                <button className="bg-white w-[100px] rounded-sm shadow-lg dark:bg-darkblue text-white">
-                                  {data.name.common}
-                                </button>
-                              </Link>
-                            );
-                          }
-                          return null;
-                        })}
-                      </div>
-                    ))
-                  : null}
+                <div className="flex gap-2 max-w-screen-lg: flex-wrap">
+                  {!isEmpty(data.borders)
+                    ? data.borders.map((btn) => (
+                        <>
+                          {borderCountry.map((data, index) => {
+                            if (data.cca3 === btn) {
+                              return (
+                                <Link key={index} to={`/${data.name.common}`}>
+                                  <button className="bg-white w-[100px] rounded-sm shadow-lg dark:bg-darkblue dark:text-white">
+                                    {data.name.common}
+                                  </button>
+                                </Link>
+                              );
+                            }
+                            return null;
+                          })}
+                        </>
+                      ))
+                    : null}
+                </div>
               </div>
             </div>
           </div>

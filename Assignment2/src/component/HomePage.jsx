@@ -12,6 +12,7 @@ const HomePage = () => {
   const [searchFilter, setSearchFilter] = useState(allCountry);
   const [filterRegion, setFilterRegion] = useState("");
   const [itemOffset, setItemOffset] = useState(0);
+  const [initalPage, setInitialPage] = useState(0);
 
   const getAllData = () => {
     axios
@@ -49,12 +50,13 @@ const HomePage = () => {
 
   const handleSearchCountry = (e) => {
     setSearchCountry(e.target.value);
-    setItemOffset(1);
     const searching = displayCountry.filter((country) =>
       country.name.common.toLowerCase().includes(e.target.value.toLowerCase())
     );
     console.log(searching);
     setSearchFilter(searching);
+    setItemOffset(0);
+    setInitialPage(0);
   };
 
   const itemsPerPage = 10;
@@ -65,8 +67,8 @@ const HomePage = () => {
 
   const handlePageClick = (event) => {
     const newOffset = (event.selected * itemsPerPage) % displayFilter.length;
-
     setItemOffset(newOffset);
+    setInitialPage(event.selected);
   };
 
   return (
@@ -77,7 +79,7 @@ const HomePage = () => {
         handleClick={handleClickFilter}
       />
       <h1 className="text-center text-3xl">{filterRegion}</h1>
-      <div className="grid sm:grid-cols-3 lg:grid-cols-4 gap-5 m-10">
+      <div className="grid justify-center items-center sm:grid-cols-3 lg:grid-cols-4 gap-5 m-10">
         {currentItems?.map((data, index) => (
           <Card
             key={index}
@@ -95,20 +97,19 @@ const HomePage = () => {
           nextLabel="next >"
           onPageChange={handlePageClick}
           pageRangeDisplayed={5}
+          forcePage={initalPage}
           pageCount={pageCount}
           previousLabel="< previous"
           renderOnZeroPageCount={null}
-          containerClassName="pagination"
-          pageClassName="page-item"
-          pageLinkClassName="page-link"
-          previousClassName="page-item"
-          previousLinkClassName="page-link"
+          containerClassName="flex justify-center items-center"
+          pageClassName="mx-1 dark:text-white"
+          pageLinkClassName="px-5 py-2 rounded-md bg-white hover:bg-neutral-50 dark:bg-darkblue dark:text-white dark:sm:hover:bg-white dark:sm:hover:text-black"
+          previousClassName="dark:text-white"
+          previousLinkClassName="border-[1px] px-5 py-2 me-2 hover:bg-white rounded-md dark:text-white dark:sm:hover:bg-white dark:sm:hover:text-black"
           nextClassName="page-item"
-          nextLinkClassName="page-link"
+          nextLinkClassName="border-[1px] px-5 py-2 me-2 rounded-md hover:bg-white dark:text-white dark:sm:hover:bg-white dark:sm:hover:text-black"
           breakClassName="page-item"
-          breakLinkClassName="page-link"
-          activeClassName="active"
-          className="w-full rounded-lg  flex justify-center items-center"
+          breakLinkClassName="border-[1px] px-5 py-2 me-2 rounded-md hover:bg-white dark:text-white dark:sm:hover:bg-white dark:sm:hover:text-black"
         />
       </div>
     </>

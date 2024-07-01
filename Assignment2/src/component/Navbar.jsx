@@ -5,7 +5,7 @@ const Navbar = ({ countryValue, countryOnChange, handleClick }) => {
   return (
     <>
       <div className="w-full mt-12">
-        <div className="flex items-center justify-around">
+        <div className="flex flex-col md:flex-row items-center justify-around gap-2">
           <div>
             <form className="max-w-md mx-auto w-[350px]">
               <label
@@ -49,7 +49,7 @@ const Navbar = ({ countryValue, countryOnChange, handleClick }) => {
             <Dropdown
               label="Filter by Region"
               dismissOnClick={false}
-              class="bg-white  rounded-lg shadow-lg p-1 dark:bg-darkblue "
+              class="bg-white  rounded-lg shadow-lg p-1 dark:bg-darkblue dark:text-white"
             >
               <Dropdown.Item onClick={() => handleClick("Africa")}>
                 Africa
