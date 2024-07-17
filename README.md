@@ -12,7 +12,7 @@ Your task is integrating with the [REST Countries API](https://restcountries.co
 > - **Bonus**: Toggle the color scheme between light and dark mode
 
 
-![Country List](images/screencapture-landing-page-zhafran-netlify-app-2024-07-17-11_58_12.png)
+![Country List](images/countrylist.png)
 
 ## Deployment
 
@@ -22,8 +22,15 @@ To get started with the Country List, im deploying the application using Vercel 
 
 Summary of what the stack looks like now including a picture with the core tech:
 
-> - HTML
-> - CSS
-> - JavaScript
+> - Material UI,
+> - Axios
+> - Flowbite
+> - Lodash
+> - PropTypes
+> - React
+> - React Paginate
+> - React Router DOM
+> - Tailwind CSS
+> - Vite
 
 ![HTML](./images/html.png) ![CSS](./images/css.png) ![JS](./images/js.png)
